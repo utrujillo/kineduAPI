@@ -4,8 +4,12 @@ class ActivityLogsController < ApplicationController
   # GET /activity_logs
   def index
     @activity_logs = ActivityLog.all
-  
-    render json: @activity_logs, rule: :index
+
+    if params[:baby_id].blank?
+      render json: @activity_logs
+    else
+      render json: @activity_logs, rule: :hidden_fields
+    end
   end
 
   # GET /activity_logs/1
