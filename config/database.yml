@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  password:
+
+development:
+  <<: *default
+  database: kineduAPI_development
+
+test:
+  <<: *default
+  database: kineduAPI_test
+
+production:
+  <<: *default
+  database: kineduAPI_production
+  username: kineduAPI
+  password: <%= ENV['KINEDUAPI_DATABASE_PASSWORD'] %>
