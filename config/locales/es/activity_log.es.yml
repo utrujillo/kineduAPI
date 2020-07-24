@@ -1,0 +1,32 @@
+es:
+  activerecord:
+    models:
+      activity_log: "Registro de actividades"
+    attributes:
+      activity_log:
+        activity_id: "Identificador de actividad:"
+        baby_id: "Identificador del bebe:"
+        assistant_id: "Identificador de asistente:"
+        start_time: "Hora de inicio:"
+
+    errors:
+      models:
+        activity_log:
+          attributes:
+            activity:
+              required: "Este campo es requerido"
+            baby:
+              required: "Este campo es requerido"
+            assistant:
+              required: "Este camop es requerido"
+            activity_id:
+              blank: "Este campo no puede permanecer vacio"
+              not_a_number: "Debe ser un valor numerico"
+            baby_id:
+              blank: "Este campo no puede permanecer vacio"
+              not_a_number: "Debe ser un valor numerico"
+            assistant_id:
+              blank: "Este campo no puede permanecer vacio"
+              not_a_number: "Debe ser un valor numerico"
+            start_time:
+              blank: "Este campo no puede permanecer vacio"
