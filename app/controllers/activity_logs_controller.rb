@@ -4,8 +4,8 @@ class ActivityLogsController < ApplicationController
   # GET /activity_logs
   def index
     @activity_logs = ActivityLog.all
-
-    render json: @activity_logs
+  
+    render json: @activity_logs, rule: :index
   end
 
   # GET /activity_logs/1
