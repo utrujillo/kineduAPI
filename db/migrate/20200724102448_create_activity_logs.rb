@@ -6,7 +6,7 @@ class CreateActivityLogs < ActiveRecord::Migration[5.2]
       t.references :activity, foreign_key: true
       t.datetime :start_time
       t.datetime :stop_time
-      t.integer :duration
+      t.float :duration
       t.string :comments
 
       t.timestamps

@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_07_24_102448) do
     t.bigint "activity_id"
     t.datetime "start_time"
     t.datetime "stop_time"
-    t.integer "duration"
+    t.float "duration"
     t.string "comments"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

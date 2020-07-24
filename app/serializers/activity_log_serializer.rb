@@ -1,5 +1,5 @@
 class ActivityLogSerializer < ActiveModel::Serializer
-  attributes :id, :baby_id, :baby_name, :teacher, :start_time, :stop_time, :duration, :comments
+  attributes :id, :baby_id, :baby_name, :teacher, :activity, :start_time, :stop_time, :duration, :comments
 
   def attributes(*args)
     hash = super
@@ -20,10 +20,14 @@ class ActivityLogSerializer < ActiveModel::Serializer
     object.assistant.name
   end
 
+  def activity
+    object.activity.name
+  end
+
   # Atributos que serán retornados dependiendo de la vista que realiza la petición
   # GET api/babies/:id/activity_logs
   INDEX = [ :id, :baby_id, :baby_name, :teacher, :start_time, :stop_time ]
   # GET api/activity_logs/:id
-  PUBLIC = [ :id, :baby_id, :baby_name, :teacher, :start_time, :stop_time, :duration, :comments ]
+  PUBLIC = [ :id, :baby_id, :baby_name, :teacher, :activity, :start_time, :stop_time, :duration, :comments ]
 
 end
