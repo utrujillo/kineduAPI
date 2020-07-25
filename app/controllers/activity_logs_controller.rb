@@ -3,12 +3,34 @@ class ActivityLogsController < ApplicationController
 
   # GET /activity_logs
   def index
-    @activity_logs = ActivityLog.order(start_time: :desc).all
+    
+    has_filter = filter_params
+    
+    if has_filter.blank? # Si se desea retornar toda la data sin filtrar
+      @activity_logs = ActivityLog.order(start_time: :desc).all
+      
+      if params[:baby_id].blank?
+        render json: @activity_logs
+      else
+        render json: @activity_logs, rule: :hidden_fields
+      end
 
-    if params[:baby_id].blank?
+    else # Si se desea retornar la data con filtros
+
+      @activity_logs = ActivityLog.order(start_time: :desc).where(nil)
+      @activity_logs = @activity_logs.filter_by_baby(params[:b]) if params[:b].present?
+      @activity_logs = @activity_logs.filter_by_assistant(params[:a]) if params[:a].present?
+      if params[:s].present?
+        case params[:s].to_i
+        when 2
+          @activity_logs = @activity_logs.filter_by_terminated(nil)
+        when 3
+          @activity_logs = @activity_logs.filter_by_process(nil)
+        end
+      end
+      
       render json: @activity_logs
-    else
-      render json: @activity_logs, rule: :hidden_fields
+
     end
   end
 
@@ -52,4 +74,14 @@ class ActivityLogsController < ApplicationController
     def activity_log_params
       params.require(:activity_log).permit(:baby_id, :assistant_id, :activity_id, :start_time, :stop_time, :duration, :comments)
     end
+
+    def filter_params
+      # Verifica si recibo algun parametro para filtrar
+      valid = false
+      valid = valid || params[:b].present?
+      valid = valid || params[:a].present?
+      valid = valid || params[:s].present?
+      return valid
+    end
+
 end

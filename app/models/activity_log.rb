@@ -32,4 +32,30 @@ class ActivityLog < ApplicationRecord
       self.duration = hours_difference > 0 ? hours_difference : 0
     end
   end
+
+  # Filtros
+  scope :filter_by_baby, -> (baby_id) { 
+                              where(
+                                "baby_id IN (?)",
+                                baby_id
+                              )  
+                            }
+  scope :filter_by_assistant, -> (assistant_id) { 
+                              where(
+                                "assistant_id IN (?)",
+                                assistant_id
+                              )  
+                            }
+  scope :filter_by_process, -> (status) { 
+                              where(
+                                "stop_time IS ?",
+                                status
+                              )  
+                            }
+  scope :filter_by_terminated, -> (status) { 
+                              where(
+                                "stop_time IS NOT ?",
+                                status
+                              )  
+                            }
 end

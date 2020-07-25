@@ -1,5 +1,5 @@
 class BabySerializer < ActiveModel::Serializer
-  attributes :name, :age_in_months, :mother_name, :father_name, :address, :phone
+  attributes :id, :name, :age_in_months, :mother_name, :father_name, :address, :phone
 
   def age_in_months
     calculate_months( object.birthday.to_date, Time.now.strftime("%Y-%m-%d").to_date )
