@@ -3,7 +3,7 @@ class ActivityLogsController < ApplicationController
 
   # GET /activity_logs
   def index
-    @activity_logs = ActivityLog.all
+    @activity_logs = ActivityLog.order(start_time: :desc).all
 
     if params[:baby_id].blank?
       render json: @activity_logs
